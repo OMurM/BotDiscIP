@@ -1,9 +1,12 @@
 import discord
 from discord.ext import tasks
 import requests
+from dotenv import load_dotenv
+import os
 
-TOKEN = 'MTMyODg2NTc4MzU1MTYyNzMxNQ.GCuGWn.hQc5aNmohSZSYJE6x92rNwCSSOqP9TMFqxgSn4'
-CHANNEL_ID = 1328866536282132524
+load_dotenv()
+TOKEN = os.getenv('DISCORD_TOKEN')
+CHANNEL_ID = int(os.getenv('CHANNEL_ID'))
 
 intents = discord.Intents.default()
 client = discord.Client(intents=intents)
@@ -29,4 +32,5 @@ async def enviar_ip():
 async def on_ready():
     print(f'Bot conectado como {client.user}')
     enviar_ip.start()
+
 client.run(TOKEN)
